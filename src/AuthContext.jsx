@@ -24,7 +24,19 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // TODO: authenticate
+  /** Sends the token to the API to authenticate the user. */
+  const authenticate = async () => {
+    try {
+      if (!token) throw Error("No token found.");
+      const response = await fetch(API + "/authenticate", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) throw Error("Authentication failed.");
+      setLocation("TUNNEL");
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const value = { location };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
