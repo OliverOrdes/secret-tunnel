@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const value = { location };
+  const value = { signup, authenticate, location };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
